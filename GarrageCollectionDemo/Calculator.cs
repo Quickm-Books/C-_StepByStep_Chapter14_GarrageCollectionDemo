@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GarrageCollectionDemo
 {
-    class Calculator
+    class Calculator : IDisposable
     {
         public Calculator()
         {
@@ -16,6 +16,12 @@ namespace GarrageCollectionDemo
         ~Calculator()
         {
             Console.WriteLine("Calculator instance finalized");
+            this.Dispose();
+        }
+
+        public void Dispose()
+        {
+            Console.WriteLine("Calculator instance being disposed");
         }
 
         public int Divide(int first, int second)
