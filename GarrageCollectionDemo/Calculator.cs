@@ -8,6 +8,8 @@ namespace GarbageCollectionDemo
 {
     class Calculator : IDisposable
     {
+        private bool disposed = false;
+
         public Calculator()
         {
             Console.WriteLine("Calculator instance created");
@@ -21,7 +23,13 @@ namespace GarbageCollectionDemo
 
         public void Dispose()
         {
-            Console.WriteLine("Calculator instance being disposed");
+            if (!this.disposed)
+            {
+                Console.WriteLine("Calculator instance being disposed");
+            }
+
+            this.disposed = true;
+            GC.SuppressFinalize(this);
         }
 
         public int Divide(int first, int second)
